@@ -268,6 +268,7 @@ async function table() {
     }
 
 }
+table()
 async function fdf(x, y, z, v) {
     const data = await covidApi.getSummary()
     // Create the chart
@@ -412,7 +413,7 @@ async function toptablechart() {
     });
 }
 countryList()
-table()
+
 
 const logBtn1 = document.getElementById('showChart');
  logBtn1.addEventListener('click', toptablechart);
