@@ -150,10 +150,10 @@ let recocovered = document.getElementById('recoverd')
     recocovered.innerHTML = TotalRecoveredValue
     DrawChart(TotalconfirmedValue, TotalDeathValue, NewconfirmedValue)
     //divide the numbers with world population
-    fdf(TotalconfirmedValue/ 7942645086, NewconfirmedValue/7942645086, TotalDeathValue/ 7942645086, TotalRecoveredValue/7942645086)
-   
-}
+    fdf(TotalconfirmedValue/ 7942645086, NewconfirmedValue/7942645086, TotalDeathValue/ 7942645086, TotalRecoveredValue/7942645086)}
 countryList()
+GlobalfetchData()
+
 function DrawChart(x, y, z) {
     // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
     // Create the chart
@@ -251,7 +251,6 @@ function animateValue(obj, start, end, duration) {
 async function table() {
     summaryData = await covidApi.getSummary()
     summary = summaryData.Global
-   
     // Load countries table
     let casesByCountries = summaryData.Countries.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed)
     let table_countries_body = document.querySelector('#table-countries tbody')
@@ -267,9 +266,7 @@ async function table() {
 
         table_countries_body.innerHTML += rows;
     }
-
 }
-table()
 async function fdf(x, y, z, v) {
     const data = await covidApi.getSummary()
     // Create the chart
@@ -412,9 +409,8 @@ async function toptablechart() {
         }]
 
     });
+    table()
 }
-
-
 
 const logBtn1 = document.getElementById('showChart');
  logBtn1.addEventListener('click', toptablechart);
