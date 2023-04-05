@@ -153,6 +153,7 @@ let recocovered = document.getElementById('recoverd')
     fdf(TotalconfirmedValue/ 7942645086, NewconfirmedValue/7942645086, TotalDeathValue/ 7942645086, TotalRecoveredValue/7942645086)
    
 }
+countryList()
 function DrawChart(x, y, z) {
     // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
     // Create the chart
@@ -412,7 +413,7 @@ async function toptablechart() {
 
     });
 }
-countryList()
+
 
 
 const logBtn1 = document.getElementById('showChart');
