@@ -113,7 +113,9 @@ let body = document.querySelector('body')
 window.onload = async () => {
     startLoading()
     console.log('Ready..')
+    await countryList()
     await GlobalfetchData()
+    await toptablechart()
     endLoading()
 }
 startLoading = () => {
@@ -150,9 +152,10 @@ let recocovered = document.getElementById('recoverd')
     recocovered.innerHTML = TotalRecoveredValue
     DrawChart(TotalconfirmedValue, TotalDeathValue, NewconfirmedValue)
     //divide the numbers with world population
-    fdf(TotalconfirmedValue/ 7942645086, NewconfirmedValue/7942645086, TotalDeathValue/ 7942645086, TotalRecoveredValue/7942645086)}
-countryList()
-GlobalfetchData()
+    fdf(TotalconfirmedValue/ 7942645086, NewconfirmedValue/7942645086, TotalDeathValue/ 7942645086, TotalRecoveredValue/7942645086)
+}
+// countryList()
+// GlobalfetchData()
 
 function DrawChart(x, y, z) {
     // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
@@ -409,11 +412,9 @@ async function toptablechart() {
         }]
 
     });
-    table()
+     table()
 }
-
 const logBtn1 = document.getElementById('showChart');
- logBtn1.addEventListener('click', toptablechart);
-
+logBtn1.addEventListener('click', toptablechart);
 let logBtn2 = document.getElementById('log');
 logBtn2.addEventListener('click', CountriesData);
