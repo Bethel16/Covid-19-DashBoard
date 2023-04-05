@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <!-- map -->
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/accessibility.js"></script>
+    <!-- chart -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- pie -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- Top Countries Chart  -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <style>
+        @import "https://code.highcharts.com/css/highcharts.css";
+        .highcharts-figure,
+        .highcharts-data-table table {
+            width: 100%;
+        }.highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #ebebeb;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }.highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }.highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }.highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+            padding: 0.5em;
+        }.highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }.highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }.highcharts-yaxis .highcharts-axis-line {
+            stroke-width: 2px;
+        }/* Link the series colors to axis colors */
+        .highcharts-color-0 {
+            fill: #7cb5ec;
+            stroke: #7cb5ec;
+        }.highcharts-axis.highcharts-color-0 .highcharts-axis-line {
+            stroke: #7cb5ec;
+        }.highcharts-axis.highcharts-color-0 text {
+            fill: #7cb5ec;
+        }.highcharts-color-1 {
+            fill: #90ed7d;
+            stroke: #90ed7d;
+        }.highcharts-axis.highcharts-color-1 .highcharts-axis-line {
+            stroke: #90ed7d;
+        }.highcharts-axis.highcharts-color-1 text {
+            fill: #90ed7d;
+        }
+    </style>
+</head>
+<body class="loading">
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="container">
+                <div class="nav">
+                    <a href="" class="logo">
+                        C<i class="bx bxs-virus-block bx-tada"> </i>VID TRACKER
+                    </a>
+                   
+                </div>
+                <a href="index.html"> Home</a>
+                <a href="extend.html"> Search by Date</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 col-md-8">
+            <div class="country-select" id="country-select">
+               
+                <!-- Country names and Country Name -->
+                <div class="row">
+                    <div class="col-lg-7"><select class="form-select country-select-toggle" id="country" name="country">
+                        </select> </div>
+                    <div class="col-lg-3"><button type="button" id="log" class="btn btn-primary"
+                            aria-placeholder="---search---">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="counter">
+            <div class="col-lg-3 col-sm-12 col-md-8">
+                <div class="box box-hover">
+                    <div class="count count-confirmed">
+                        <div class="count-icon">
+                            <i class="bx bxs-virus"> </i>
+                        </div>
+                        <div class="count-info">
+                            <h5 id="confirmed-total">0</h5>
+                            <span>Total Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- counter -->
+            <div class="col-lg-3 col-sm-12 col-md-8">
+                <div class="box box-hover">
+                    <div class="count count-recovered">
+                        <div class="count-icon">
+                            <i class="bx bxs-smile"> </i>
+                        </div>
+                        <div class="count-info">
+                            <h5 id="new-confirmed">0</h5>
+                            <span>New Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- counter -->
+            <div class="col-lg-3 col-sm-12 col-md-8">
+                <div class="box box-hover">
+                    <div class="count count-death">
+                        <div class="count-icon">
+                            <i class="bx bxs-sad"> </i>
+                        </div>
+                        <div class="count-info">
+                            <h5 id="death-total">0</h5>
+                            <span>Deaths</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- counter -->
+            </div>
+            <!-- counter -->
+            <div class="col-lg-3 col-sm-12 col-md-8">
+                <div class="box box-hover">
+                    <div class="count count-death">
+                        <div class="count-icon">
+                            <i class="bx bxs-sad"> </i>
+                        </div>
+                        <div class="count-info">
+                            <h5 id="recoverd">0</h5>
+                            <span>Deaths</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- counter -->
+            </div>
+            <div class="col-lg-2">
+                <!--  -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="container1"></div>
+            </div>
+            <div class="col-lg-5">
+                <figure class="highcharts-figure">
+                    <div id="container2"></div>
+                    <p class="highcharts-description">
+                        Pie chart showing a hollow semi-circle. This is a compact visualization,
+                        often used in dashboards.
+                    </p>
+                </figure>
+            </div>
+        </div>
+        <div class="">
+            <figure class="highcharts-figure">
+                <div id="container3"></div>
+            </figure>
+        </div>
+        <div class="table">
+            <table class="table table-dark table-striped-columns" id="table-countries">
+                <thead>
+                    <tr>
+                        <th>
+                            country
+                        </th>
+                        <th> Confirmed</th>
+                        <th> NewConfirmed</th>
+                        <th> Deaths</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Test </td>
+                        <td> Test </td>
+                        <td> Test </td>
+                        <td> Test </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       <center>  <button type="button"  class="btn btn-success" id="showChart" style="width:20%;">Table chart</button> </center>
+        <div class="row">
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+        
+        <!-- footer -->
+        <div class="footer">
+            source from <a href="#" target="_blank">api.covid19api.com</a>
+        </div>
+        <!--end of footer -->
+
+        <!-- loader -->
+        <div class="loader">
+            <i class="bx bxs-virus bx-spin"> </i>
+        </div>
+        <!-- end of loader -->
+        <script src="fetch.js"></script>
+</body>
+
+</html>
